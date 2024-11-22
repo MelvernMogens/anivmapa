@@ -1,0 +1,124 @@
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #0b1522;
+}
+
+/* Styling the heart */
+.heart {
+  position: relative;
+  height: 150px;
+  width: 150px;
+  background: #f20044;
+  transform: rotate(-45deg);
+  box-shadow: 15px 5px 150px 20px #f20044;
+  animation: heart 0.6s linear infinite;
+  cursor: pointer;
+}
+.heart::before,
+.heart::after {
+  content: "";
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  background: #f20044;
+  border-radius: 50%;
+}
+.heart::before {
+  top: -50%;
+}
+.heart::after {
+  right: -50%;
+}
+
+.heart-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(45deg); /* Counteract heart rotation */
+  color: white;
+  font-family: 'Arial', sans-serif;
+  font-size: 14px; /* Adjust font size */
+  font-weight: bold;
+  pointer-events: none; /* Ensure clicks pass through to the heart */
+  text-align: center;
+  z-index: 1; /* Ensure text is on top */
+  width: 100%; /* Ensure text fits inside the heart */
+  white-space: nowrap; /* Prevent text from wrapping */
+  overflow: visible; /* Ensure no clipping */
+}
+
+@keyframes heart {
+  0% {
+    transform: scale(1.07) rotate(-45deg);
+  }
+  80% {
+    transform: scale(1) rotate(-45deg);
+  }
+  100% {
+    transform: scale(0.8) rotate(-45deg);
+  }
+}
+
+/* Hide the letter container by default */
+.letter-container {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.8);
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+}
+
+/* Styling for the letter modal */
+.letter {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  width: 300px;
+  text-align: center;
+  opacity: 0;
+  transform: scale(0.8);
+  animation: fadeIn 0.5s forwards;
+}
+
+/* Animation to fade and scale in the letter */
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Styling for the hardcoded message */
+.message {
+  font-family: 'Arial', sans-serif;
+  font-size: 16px;
+  color: #333;
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
+
+/* Close button styling */
+.letter button {
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+  background-color: #f20044;
+  color: white;
+  border-radius: 5px;
+}
+
+/* Animation to reveal the letter container */
+.letter-container.active {
+  display: flex;
+}
